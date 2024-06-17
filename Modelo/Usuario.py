@@ -15,3 +15,6 @@ class Usuario:
             return False
         else:
             return True
+    
+    def agregarLibro(self,libro):
+        self.libros.append(libro)

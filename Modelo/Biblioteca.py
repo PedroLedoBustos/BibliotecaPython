@@ -62,3 +62,30 @@ class Biblioteca:
             print(f"El libro con el titulo: {libroEncontrado.getTitulo()} ha sido dado de baja")
         else:
             print("El libro no se puede dar de baja porque no esta registrado o esta prestado")
+
+    def prestarLibro():
+        id= Utilidades.leerInteger("Introduce el id del libro que quieres prestar: ")
+        libroEncontrado=None
+        for book in Biblioteca.libros:
+            if book.getId()== id:
+                libroEncontrado=book
+        
+        if libroEncontrado ==None or libroEncontrado.getPrestado()==True:
+            print("El libro no esta registrado o ya esta prestado")
+        else:
+            nombre= Utilidades.leerString("Introduce el nombre del usuario al que se va a prestar el libro: ")
+            apellido= Utilidades.leerString("Introduce el apellido del usuario al que se va a prestar el libro: ")
+            usuario= Usuario(nombre,apellido)
+            for user in Biblioteca.usuarios:
+                if user.getNombre()== usuario.getNombre() and user.getApellido()== usuario.getApellido():
+                    user.agregarLibro(libroEncontrado)
+                    libroEncontrado.setUsuario(user)
+                    libroEncontrado.setPrestado(True)
+                    print(f"El libro: {libroEncontrado.getTitulo()} ha sido prestado al usuario {user.getNombre()}")
+                else:
+                    print("El usuario no esta registrado, no se puede prestar el libro")
+    
+    def librosDisponibles():
+        for libro in Biblioteca.libros:
+            if libro.getPrestado()== False:
+                print(f"TITULO: {libro.getTitulo()} CATEGORIA: {libro.getCategoria()} PRESTADO: {libro.getPrestado()}")
