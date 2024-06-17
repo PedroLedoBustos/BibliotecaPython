@@ -10,16 +10,16 @@ class Libro:
         return self.titulo
     
     def getCategoria(self):
-        return self.titulo
+        return self.categoria
     
     def getId(self):
-        return self.titulo
+        return self.id
     
     def getPrestado(self):
-        return self.titulo
+        return self.prestado
     
     def getUsuario(self):
-        return self.titulo
+        return self.usuario
     
     def setPrestado(self, estaPrestado):
         self.prestado= estaPrestado

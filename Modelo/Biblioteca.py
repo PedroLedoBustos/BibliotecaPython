@@ -1,3 +1,4 @@
+from Modelo.Libro import Libro
 from Modelo.Usuario import Usuario
 from Utilidades.Utilidades import Utilidades
 
@@ -34,3 +35,30 @@ class Biblioteca:
             print("Usuario dado de baja")
         else:
             print("El usuario no esta registrado o tiene libros prestados")
+
+    def altaLibro():
+        titulo= Utilidades.leerString("Introduce el título del libro: ")
+        categoria= Utilidades.leerString("Introduce la categoria del libro: ")
+        id= Utilidades.leerInteger("Introduce el id del libro: ")
+
+        libro= Libro(titulo,categoria,id)
+
+        if any(book.getId()== libro.getId() for book in Biblioteca.libros):
+            print("Lo siento, este libro ya esta dado de alta")
+        else:
+            Biblioteca.libros.append(libro)
+            print("Libro dado de alta")
+    
+    def bajaLibro():
+        id= Utilidades.leerInteger("Introduce el id del libro que quieres dar de baja: ")
+        libroEncontrado= None
+
+        for book in Biblioteca.libros:
+            if book.getId()== id:
+                libroEncontrado=book
+
+        if libroEncontrado != None and libroEncontrado.getPrestado()==False:
+            Biblioteca.libros.remove(libroEncontrado)
+            print(f"El libro con el titulo: {libroEncontrado.getTitulo()} ha sido dado de baja")
+        else:
+            print("El libro no se puede dar de baja porque no esta registrado o esta prestado")
