@@ -1,7 +1,8 @@
+from Modelo.Biblioteca import Biblioteca
 from Utilidades.Utilidades import Utilidades
 
 
-# biblioteca= biblioteca
+biblioteca= Biblioteca
 
 def menu():
     salir=False
