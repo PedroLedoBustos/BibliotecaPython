@@ -86,6 +86,26 @@ class Biblioteca:
                     print("El usuario no esta registrado, no se puede prestar el libro")
     
     def librosDisponibles():
+        Biblioteca.libros.sort (key=lambda libro:libro.getCategoria())
+
         for libro in Biblioteca.libros:
             if libro.getPrestado()== False:
                 print(f"TITULO: {libro.getTitulo()} CATEGORIA: {libro.getCategoria()} PRESTADO: {libro.getPrestado()}")
+
+    def librosUsuario():
+        nombre= Utilidades.leerString("Introduce el nombre del usuario: ")
+        apellido= Utilidades.leerString("Introduce el apellido del usuario: ")
+        usuario= Usuario(nombre,apellido)
+        listaLibros=[]
+
+        for user in Biblioteca.usuarios:
+            if user.getNombre()== usuario.getNombre() and user.getApellido()== usuario.getApellido():
+                listaLibros= user.getLibros()
+        
+        if listaLibros== None:
+            print("Este usuario no tiene libros prestados")
+        else:
+            print(f"LIBROS PRESTADOS AL USUARIO: {user.getNombre()}")
+            for libro in listaLibros:
+                print(f"Titulo: {libro.getTitulo()} Categoria: {libro.getCategoria()} Prestado: {libro.getPrestado()}")
+

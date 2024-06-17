@@ -18,3 +18,9 @@ class Usuario:
     
     def agregarLibro(self,libro):
         self.libros.append(libro)
+    
+    def getLibros(self):
+        if not self.libros:
+            return None
+        else:
+            return self.libros
