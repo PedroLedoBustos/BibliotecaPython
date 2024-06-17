@@ -1,3 +1,4 @@
+import datetime
 class Libro:
     def __init__(self, titulo, categoria, id):
         self.titulo=titulo
@@ -5,6 +6,7 @@ class Libro:
         self.id= id
         self.prestado= False
         self.usuario=None
+        self.fecha= None
 
     def getTitulo(self):
         return self.titulo
@@ -20,6 +22,12 @@ class Libro:
     
     def getUsuario(self):
         return self.usuario
+    
+    def getFecha(self):
+        return self.fecha
+    
+    def setFecha(self, fechaNueva):
+        self.fecha=fechaNueva
     
     def setPrestado(self, estaPrestado):
         self.prestado= estaPrestado

@@ -1,6 +1,7 @@
 from Modelo.Libro import Libro
 from Modelo.Usuario import Usuario
 from Utilidades.Utilidades import Utilidades
+import datetime
 
 
 class Biblioteca:
@@ -81,16 +82,20 @@ class Biblioteca:
                     user.agregarLibro(libroEncontrado)
                     libroEncontrado.setUsuario(user)
                     libroEncontrado.setPrestado(True)
+                    fecha= datetime.datetime.now()
+                    libroEncontrado.setFecha(fecha)
                     print(f"El libro: {libroEncontrado.getTitulo()} ha sido prestado al usuario {user.getNombre()}")
                 else:
                     print("El usuario no esta registrado, no se puede prestar el libro")
     
     def librosDisponibles():
         Biblioteca.libros.sort (key=lambda libro:libro.getCategoria())
-
-        for libro in Biblioteca.libros:
-            if libro.getPrestado()== False:
-                print(f"TITULO: {libro.getTitulo()} CATEGORIA: {libro.getCategoria()} PRESTADO: {libro.getPrestado()}")
+        if not Biblioteca.libros:
+            print("No hay libros disponibles en la biblioteca")
+        else:
+            for libro in Biblioteca.libros:
+                if libro.getPrestado()== False:
+                    print(f"TITULO: {libro.getTitulo()} CATEGORIA: {libro.getCategoria()} PRESTADO: {libro.getPrestado()}")
 
     def librosUsuario():
         nombre= Utilidades.leerString("Introduce el nombre del usuario: ")
@@ -107,5 +112,5 @@ class Biblioteca:
         else:
             print(f"LIBROS PRESTADOS AL USUARIO: {user.getNombre()}")
             for libro in listaLibros:
-                print(f"Titulo: {libro.getTitulo()} Categoria: {libro.getCategoria()} Prestado: {libro.getPrestado()}")
+                print(f"Titulo: {libro.getTitulo()} Categoria: {libro.getCategoria()} Fecha: {libro.getFecha()}")
 
